@@ -2,6 +2,7 @@ package com.example.kbtg;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Random;
 
@@ -24,10 +25,11 @@ public class DemoServiceTest {
 	@Test
 	public void throw_exception_1() {
 		DemoService demoService = new DemoService();
-		demoService.setRandom(new RandomNumber(2));
+		demoService.setRandom(new RandomNumber(1));
 		// JAVA Style
 		try {
 			demoService.generateData("marut");
+			fail();
 		} catch (RuntimeException e) {
 			assertEquals("Invalid number with 1", e.getMessage());
 		}
@@ -39,7 +41,7 @@ public class DemoServiceTest {
 	        demoService.setRandom(new RandomNumber(1));
 	        // JUnit 5 style
 	        Exception exception = assertThrows(RuntimeException.class, () -> {
-	            demoService.generateData("somkiat");
+	            demoService.generateData("marut");
 	        });
 	        assertEquals("Invalid number with 1", exception.getMessage());
 
