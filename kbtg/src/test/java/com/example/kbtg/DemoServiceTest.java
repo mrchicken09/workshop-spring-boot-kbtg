@@ -1,6 +1,7 @@
 package com.example.kbtg;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Random;
 
@@ -13,34 +14,48 @@ public class DemoServiceTest {
 	@DisplayName("ในการทำงานต้อง random = 5")
 	public void random_5() {
 		DemoService demoService = new DemoService();
-		demoService.setRandom(new Random5());
+		demoService.setRandom(new RandomNumber(5));
 		String actualResult = demoService.generateData("marut");
 		assertEquals("marut5", actualResult);
 
 	}
 
+
 	@Test
-	@DisplayName("ในการทำงานต้อง random = 2")
-	public void random_2() {
+	public void throw_exception_1() {
 		DemoService demoService = new DemoService();
-		demoService.setRandom(new Random2());
-		String actualResult = demoService.generateData("marut");
-		assertEquals("marut2", actualResult);
+		demoService.setRandom(new RandomNumber(2));
+		// JAVA Style
+		try {
+			demoService.generateData("marut");
+		} catch (RuntimeException e) {
+			assertEquals("Invalid number with 1", e.getMessage());
+		}
+
+	}
+	@Test
+	public void throw_exception_2() {
+		 DemoService demoService = new DemoService();
+	        demoService.setRandom(new RandomNumber(1));
+	        // JUnit 5 style
+	        Exception exception = assertThrows(RuntimeException.class, () -> {
+	            demoService.generateData("somkiat");
+	        });
+	        assertEquals("Invalid number with 1", exception.getMessage());
 
 	}
 
 }
 
-class Random5 extends Random {
-	@Override
-	public int nextInt(int bound) {
-		return 5;
-	}
-}
+class RandomNumber extends Random {
+	private final int result;
 
-class Random2 extends Random {
+	RandomNumber(int result) {
+		this.result = result;
+	}
+
 	@Override
 	public int nextInt(int bound) {
-		return 2;
+		return result;
 	}
 }

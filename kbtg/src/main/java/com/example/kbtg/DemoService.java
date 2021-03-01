@@ -6,17 +6,18 @@ import javax.management.RuntimeErrorException;
 
 public class DemoService {
 	Random random;
+
 	public void setRandom(Random random) {
 		this.random = random;
-		
+
 	}
 
 	public String generateData(String name) {
 		int number = random.nextInt(10); // random 0-9
-		if(number >=5 && number <=8) {
-			return name+ number;
+		if (number >= 5 && number <= 8) {
+			return name + number;
 		}
-		throw new RuntimeException("Invalid Number with " +number);
+		throw new RuntimeException("Invalid Number with " + number);
 	}
 
 //	public static void main(String[] args) {
@@ -36,8 +37,6 @@ public class DemoService {
 //		
 //		System.out.println(demoService.generateData("marut"));
 //	}
-	
-
 
 }
 
@@ -47,4 +46,3 @@ public class DemoService {
 //        return 5;
 //    }
 // }
-

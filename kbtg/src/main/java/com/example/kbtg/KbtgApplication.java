@@ -8,7 +8,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class KbtgApplication {
 
 	public static void main(String[] args) {
-		
+
 		ConfigurableApplicationContext context = SpringApplication.run(KbtgApplication.class, args);
 		String[] beans = context.getBeanDefinitionNames();
 		for (String bean : beans) {
