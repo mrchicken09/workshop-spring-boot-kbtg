@@ -9,6 +9,6 @@ public class UserController {
 
 	@GetMapping("/user/{id}")
 	public UserResponse getUserById(@PathVariable int id) {
-		return new UserResponse(id , "marut",32);
+		return new UserResponse(id , "marut",30);
 	}
 }
