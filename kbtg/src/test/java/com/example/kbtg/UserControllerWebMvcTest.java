@@ -29,21 +29,18 @@ public class UserControllerWebMvcTest {
 	@Test
 	public void failure_user_not_found() throws Exception {
 		// Arrange
-        when(userService.getInfo(15))
-                .thenThrow(new UserNotFoundException("User not found id = 15"));
-        // Act
-        MvcResult mvcResult = mvc.perform(get("/user/15")
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()).andReturn();
+		when(userService.getInfo(15)).thenThrow(new UserNotFoundException("User not found id = 15"));
+		// Act
+		MvcResult mvcResult = mvc.perform(get("/user/15").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andReturn();
 
-        // String => JSON Message
-        String jsonResult = mvcResult.getResponse().getContentAsString();
-        // Convert JSON message to Object/POJO
-        ObjectMapper mapper = new ObjectMapper();
-        ErrorResponse response
-                = mapper.readValue(jsonResult, ErrorResponse.class);
-        // Assert
-        assertEquals(1234, response.getCode());
-        assertEquals("User not found id = 15", response.getMessage());
+		// String >>> JSON Message
+		String jsonResult = mvcResult.getResponse().getContentAsString();
+		// Convert JSON message to Object||POJO
+		ObjectMapper mapper = new ObjectMapper();
+		ErrorResponse response = mapper.readValue(jsonResult, ErrorResponse.class);
+		// Assert
+		assertEquals(1234, response.getCode());
+		assertEquals("User not found id = 15", response.getMessage());
 	}
 }
