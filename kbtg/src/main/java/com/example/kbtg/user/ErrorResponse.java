@@ -4,10 +4,7 @@ public class ErrorResponse {
 	private int code;
 	private String message;
 
-	public ErrorResponse(int i, String message) {
-		// TODO Auto-generated constructor stub
-	}
-
+	
 	public int getCode() {
 		return code;
 	}
@@ -24,6 +21,15 @@ public class ErrorResponse {
 		this.message = message;
 	}
 
+	public ErrorResponse(int code, String message) {
+		super();
+		this.code = code;
+		this.message = message;
+	}
+
+	public ErrorResponse() {
+
+	}
 	
 
 }

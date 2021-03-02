@@ -12,7 +12,7 @@ public class UserService {
 
 		}
 		//fail
-			throw new UserNotFoundException("User not found id = " + id);
+			throw new UserNotFoundException("User not found id = 15" + id);
 		
 	}
 
