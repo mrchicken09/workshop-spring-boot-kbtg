@@ -1,8 +1,9 @@
-package com.example.kbtg;
+package com.example.kbtg.user;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,9 +21,21 @@ public class UserControllerTest {
 	private TestRestTemplate restTemplate;
 	@Autowired
 	private UserService userservice;
+	@Autowired
+	private UserRepository userRepository;
+	
+	@AfterEach
+	public void clearData() {
+		userRepository.deleteAll();
+	}
 
 	@Test
 	public void success_get_user_id_1() {
+		 MyUser adduser = new MyUser();
+	        adduser.setName("marut");
+	        adduser.setAge(30);
+	        userRepository.save(adduser);
+	        
 		UserResponse response = restTemplate.getForObject("/user/1", UserResponse.class);
 		assertEquals(1, response.getId());
 		assertEquals("marut", response.getName());
