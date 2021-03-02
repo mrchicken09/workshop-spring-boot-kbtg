@@ -18,10 +18,7 @@ public class UserRepositoryTest {
 	    @Test
 	    public void found_get_user_by_id() {
 	        // Arrange
-	        MyUser adduser = new MyUser();
-	        adduser.setName("marut");
-	        adduser.setAge(30);
-	        userRepository.save(adduser);
+	       
 	        // Act
 	        Optional<MyUser> user = userRepository.findById(1);
 	        // Assert
