@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 
+import com.example.kbtg.user.ErrorResponse;
+import com.example.kbtg.user.UserNotFoundException;
 import com.example.kbtg.user.UserResponse;
 import com.example.kbtg.user.UserService;
 
@@ -33,13 +35,22 @@ public class UserControllerTest {
 	
 	@Test
 	public void throw_exception_user_not_found_id_15() {
-		 
-	        // JUnit 5 style
-	        Exception exception = assertThrows(RuntimeException.class, () -> {
-	        	userservice.getInfo(15);
-	        });
-	        assertEquals("User not found id = 15", exception.getMessage());
+		ErrorResponse response = restTemplate.getForObject("/user/15", ErrorResponse.class);
+		assertEquals(1234, response.getCode());
+
+		assertEquals("User not found id = 15", response.getMessage());
 
 	}
+	
+//	@Test
+//	public void throw_exception_user_not_found_id_15() {
+//		 
+//	        // JUnit 5 style
+//	        Exception exception = assertThrows(RuntimeException.class, () -> {
+//	        	userservice.getInfo(15);
+//	        });
+//	        assertEquals("User not found id = 15", exception.getMessage());
+//
+//	}
 
 }
